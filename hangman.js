@@ -105,6 +105,7 @@ play.addEventListener("click",playFunc);
 function playFunc(){
     currentWord = words[Math.floor(Math.random() * words.length)]
     console.log(currentWord);
+
     for (var i = 0; i < currentWord.length; i++){
 	if(currentWord[i] != " "){
 	    var l = document.createElementNS("http://www.w3.org/2000/svg","text");
