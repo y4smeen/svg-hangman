@@ -22,20 +22,28 @@ var makeLetters = function(){
 	newLetter.innerHTML = letters[i];
 	buttons.appendChild(newLetter);
     }
+    getButtons();
 }
-/**
 var getButtons = function(){
     var buttons = document.getElementById("buttons"); 
     var letters2 = buttons.getElementsByTagName("button"); 
     for (var i = 1; i < letters2.length; i++) { 
-	var status = letters2[i].getAttribute("id"); 
-	letters2[i].addEventListener("click", typeLetter(status));
+	var letter = letters2[i].getAttribute("id"); 
+	letters2[i].addEventListener("click", function(){
+	    var l = document.createElementNS("http://www.w3.org/2000/svg","text");
+	    l.setAttribute("x","50");
+	    l.setAttribute("y","50");
+	    l.setAttribute("font-family","sans-serif");
+	    l.setAttribute("font-size","20px");
+	    l.textContent=letter;
+	    pic.appendChild(l);
+	}
+				    );
     }
 }
-**/
 //Fix this plz
 
-makeLetters();
+//makeLetters();
 //getButtons();
 
 
@@ -53,8 +61,6 @@ makeLetters();
   }
 
   getElement();
-*/
-
 
 var getA = document.getElementById("a");
 var getB = document.getElementById("b");
@@ -88,6 +94,7 @@ function typeA(e){
     typeLetter(e);
 }
 
+*/
 function typeLetter(letter){
     var l = document.createElementNS("http://www.w3.org/2000/svg","text");
     l.setAttribute("x","50");
@@ -105,7 +112,6 @@ play.addEventListener("click",playFunc);
 function playFunc(){
     currentWord = words[Math.floor(Math.random() * words.length)]
     console.log(currentWord);
-
     for (var i = 0; i < currentWord.length; i++){
 	if(currentWord[i] != " "){
 	    var l = document.createElementNS("http://www.w3.org/2000/svg","text");
@@ -119,6 +125,7 @@ function playFunc(){
 	    pic.appendChild(l);
 	}
     }
+    makeLetters();
 }
 
 
