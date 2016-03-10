@@ -23,8 +23,20 @@ var makeLetters = function(){
 	buttons.appendChild(newLetter);
     }
 }
+/**
+var getButtons = function(){
+    var buttons = document.getElementById("buttons"); 
+    var letters2 = buttons.getElementsByTagName("button"); 
+    for (var i = 1; i < letters2.length; i++) { 
+	var status = letters2[i].getAttribute("id"); 
+	letters2[i].addEventListener("click", typeLetter(status));
+    }
+}
+**/
+//Fix this plz
 
 makeLetters();
+//getButtons();
 
 
 /*
@@ -73,7 +85,7 @@ var getZ = document.getElementById("z");
 getA.addEventListener("click",typeA);
 
 function typeA(e){
-    typeLetter("a");
+    typeLetter(e);
 }
 
 function typeLetter(letter){
