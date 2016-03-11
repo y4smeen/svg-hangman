@@ -74,7 +74,7 @@ makeLetters();
 function typeLetter(letter){
 	chosenLetters.push(letter);
     for (var i = 0; i<currentWord.length; i++){
-		if (currentWord[i] == letter){
+		if (currentWord[i].toUpperCase() == letter){
 			calcScore(letter);
 			var l = document.createElementNS("http://www.w3.org/2000/svg","text");
 			xcoor = 50 + 45*i + 5;
@@ -98,6 +98,7 @@ function typeLetter(letter){
 		if (!complete2){
 			complete = false;
 		}
+
     }
     if (complete){
 		win;
@@ -116,6 +117,7 @@ function calcScore(letter){
 	var i = letters.indexOf(letter);
 	p = points[i];
 	score += p;
+	//console.log(score);
 }
 
 var play = document.getElementById("play");
