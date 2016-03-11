@@ -1,6 +1,6 @@
 var pic = document.getElementById("vimage");
 
-var xcoor, ycoor, textElements, textElementLength;
+var xcoor, ycoor, textElements, textElementLength, numOfGuesses;
 var score = 0;
 
 var letters = ['A','B','C','D','E','F','G','H','I',
@@ -79,38 +79,47 @@ makeLetters();
 
 //displays the letter on screen if the letter clicked matches the letters in the word
 function typeLetter(letter){
-	if (chosenLetters.indexOf(letter.toUpperCase()) < 0){
-	    chosenLetters.push(letter);
-	    console.log(chosenLetters);
-	    for (var i = 0; i<currentWord.length; i++){
-			if (currentWord[i].toUpperCase() == letter){
-				calcScore(letter);
-				scoreText.textContent="Score: " + score;
-	    		pic.appendChild(scoreText);
-				var l = document.createElementNS("http://www.w3.org/2000/svg","text");
-				xcoor = 50 + 45*i + 5;
-				ycoor = 50;
-				l.setAttribute("x",xcoor.toString());
-				l.setAttribute("y",ycoor.toString());
-				l.setAttribute("font-family","sans-serif");
-				l.setAttribute("font-size","20px");
-				l.textContent=letter;
-				pic.appendChild(l);
-			}
-	    }
-	    var complete = true;
-	    for (var x = 0; x < currentWord.length; x++){
-			if(chosenLetters.indexOf(currentWord[x].toUpperCase()) < 0){
-				complete = false;
-				//console.log(currentWord[x].toUpperCase() + chosenLetters.indexOf(currentWord[x].toUpperCase()));
-			}
-	    }
-	    console.log(complete);
-	    if (complete === true){
-			//console.log(score);			
-			win();
+    if (chosenLetters.indexOf(letter.toUpperCase()) < 0){
+	chosenLetters.push(letter);
+	console.log(chosenLetters);
+	
+	/*
+	  for(ii=0; ii<chosenLetters.length; ii++){
+	  if (currentWord.indexOf(chosenLetters[ii]) < 0){
+	  numOfGuesses++;
+	  }
+	  }
+	  draw(numOfGuesses);
+	*/
+	for (var i = 0; i<currentWord.length; i++){
+	    if (currentWord[i].toUpperCase() == letter){
+		calcScore(letter);
+		scoreText.textContent="Score: " + score;
+	    	pic.appendChild(scoreText);
+		var l = document.createElementNS("http://www.w3.org/2000/svg","text");
+		xcoor = 50 + 45*i + 5;
+		ycoor = 50;
+		l.setAttribute("x",xcoor.toString());
+		l.setAttribute("y",ycoor.toString());
+		l.setAttribute("font-family","sans-serif");
+		l.setAttribute("font-size","20px");
+		l.textContent=letter;
+		pic.appendChild(l);
 	    }
 	}
+	var complete = true;
+	for (var x = 0; x < currentWord.length; x++){
+	    if(chosenLetters.indexOf(currentWord[x].toUpperCase()) < 0){
+		complete = false;
+		//console.log(currentWord[x].toUpperCase() + chosenLetters.indexOf(currentWord[x].toUpperCase()));
+	    }
+	}
+	console.log(complete);
+	if (complete === true){
+	    //console.log(score);			
+	    win();
+	}
+    }
 }
 
 function win(){
@@ -120,10 +129,10 @@ function win(){
     scoreText.textContent="Score: " + score;
     pic.appendChild(scoreText);
     var r = window.confirm("Congrats Your Guessed Correctly! Your score is " + score + "!\n\nPlay Another One?");
-	if (r === true) {
-		console.log(5);
-		playFunc();
-	}
+    if (r === true) {
+	console.log(5);
+	playFunc();
+    }
 }
 
 function calcScore(letter){
@@ -142,22 +151,22 @@ play.addEventListener("click",playFunc);
 //removes the previous words/spaces from the screen
 //adds this word's spaces to the screen
 function playFunc(){
-	chosenLetters = [];
-	var catRand = Math.floor(Math.random() * 4);
-	if (catRand == 0){
-		currentCat = states;
-		category = "US States";
-	} else if (catRand == 1){
-		currentCat = foods;
-		category = "Foods and Drinks";
-	} else if (catRand == 2){
-		currentCat = people;
-		category = "Historical Figures";
-	} else {
-		currentCat = animals;
-		category = "Animals";
-	}
-	console.log(currentCat);
+    chosenLetters = [];
+    var catRand = Math.floor(Math.random() * 4);
+    if (catRand == 0){
+	currentCat = states;
+	category = "US States";
+    } else if (catRand == 1){
+	currentCat = foods;
+	category = "Foods and Drinks";
+    } else if (catRand == 2){
+	currentCat = people;
+	category = "Historical Figures";
+    } else {
+	currentCat = animals;
+	category = "Animals";
+    }
+    console.log(currentCat);
     currentWord = currentCat[Math.floor(Math.random() * currentCat.length)];
     console.log(currentWord);
 
@@ -169,17 +178,17 @@ function playFunc(){
     }
 
     for (var i = 0; i < currentWord.length; i++){
-		if(currentWord[i] != " "){
-		var l = document.createElementNS("http://www.w3.org/2000/svg","text");
-		xcoor = 50 + 45*i;
-		ycoor = 53;
-		l.setAttribute("x",xcoor.toString());
-		l.setAttribute("y",ycoor.toString());
-		l.setAttribute("font-family","sans-serif");
-		l.setAttribute("font-size","40px");
-		l.textContent="_";
-		pic.appendChild(l);
-		}
+	if(currentWord[i] != " "){
+	    var l = document.createElementNS("http://www.w3.org/2000/svg","text");
+	    xcoor = 50 + 45*i;
+	    ycoor = 53;
+	    l.setAttribute("x",xcoor.toString());
+	    l.setAttribute("y",ycoor.toString());
+	    l.setAttribute("font-family","sans-serif");
+	    l.setAttribute("font-size","40px");
+	    l.textContent="_";
+	    pic.appendChild(l);
+	}
     }
     var c = document.createElementNS("http://www.w3.org/2000/svg", "text");
     xcor = 50;
@@ -198,7 +207,23 @@ function playFunc(){
 }
 
 
+var drawPerson = function(numOfGuesses){
+    bodyPart = bodyParts[numOfGuesses];
+    draw(bodyPart);
+}
 
 
 
+var draw = function(bodyPart){
+    if (bodyPart = "head"){
+	var c = document.createElementNS("http://www.w3.org/2000/svg","ellipse");
+	c.setAttribute("cx","600");
+	c.setAttribute("cy","50");
+	c.setAttribute("rx","25");
+	c.setAttribute("ry","50");
+	c.setAttribute("fill","white");
+	c.setAttribute("stroke","black");
+	pic.appendChild(c);
+    }
+}
 
