@@ -244,17 +244,7 @@ var draw = function(bodyPart){
 		c.setAttribute("x1","900");
 		c.setAttribute("x2","900");
 		c.setAttribute("y1","100");
-		c.setAttribute("ry","300");
-		c.setAttribute("stroke","black");
-		pic.appendChild(c);
-    }
-    if (bodyPart = "body"){
-		var c = document.createElementNS("http://www.w3.org/2000/svg","ellipse");
-		c.setAttribute("cx","900");
-		c.setAttribute("cy","50");
-		c.setAttribute("rx","25");
-		c.setAttribute("ry","50");
-		c.setAttribute("fill","black");
+		c.setAttribute("y2","300");
 		c.setAttribute("stroke","black");
 		pic.appendChild(c);
     }
@@ -288,5 +278,17 @@ var draw = function(bodyPart){
 		c.setAttribute("stroke","black");
 		pic.appendChild(c);
     }
+    if (numOfGuesses == 6){
+    	lose();
+    }
+    
 }
-
+ function lose(){
+ 	var r = window.confirm("Gsme Over! Your score is " + score + "!\n\nNew Game");
+    if (r === true) {
+	console.log(5);
+	score = 0;
+	numOfGuesses = 0;
+	playFunc();
+    }
+}
