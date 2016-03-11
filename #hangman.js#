@@ -1,17 +1,10 @@
 var pic = document.getElementById("vimage");
 
 var xcoor, ycoor, textElements, textElementLength;
-var score = 0;
 
 var letters = ['A','B','C','D','E','F','G','H','I',
                'J','K','L','M','N','O','P','Q','R',
                'S','T','U','V','W','X','Y','Z'];
-
-var points = [1, 3, 3, 2, 1, 4, 2, 4, 1, 
-	      8, 5, 1, 3, 1, 1, 3, 10, 1, 1, 
-	      1, 1, 4, 4, 8, 4, 10];
-
-var chosenLetters = [];
 
 var words = ["AAAAAA", "SOFTWARE DEVELOPMENT", "HELLO"];
 
@@ -34,11 +27,12 @@ var foods = ["asparagus", "apples", "avacado", "acorn", "almond", "bacon", "bean
 	     "Lasagna", "Meatballs", "Milk", "Milkshake","Noodles","Pizza", "Peppers", "Pancakes",
 	     "Quesadilla", "Spinach", "Spaghetti", "Tater tots", "Toast", "Waffles", "Wine", "Yogurt"];
 
-var people = ["Aristotle", "Plato", "Jesus Christ", "Socrates", 
+var people = ["Aristotle", "Plato", "Jesus Christ", "Socrates", "Alexander the Great",
 	      "Leonardo da Vinci", "Confucius", "Julius Caesar", "Homer", "Pythagoras", "Archimedes",
 	      "Moses", "Muhammad", "Abraham", "Adolf Hitler", "Charlemagne",
-	      "Michelangelo", "Augustus", "Napoleon Bonaparte", "Isaac Newton", "Gautama Buddha", "Cleopatra", "Martin Luther",
-	      "Karl Marx", "Marco Polo", "Cicero", "Genghis Khan"];
+	      "William Shakespeare", "Michelangelo", "Augustus", "Isaac Newton",
+	      "Albert Einstein", "Gautama Buddha", "Cleopatra", "Martin Luther", "Galileo Galilei",
+	      "Karl Marx", "Marco Polo", "Cicero", "Vincent van Gogh", "Genghis Khan"];
 
 var animals = ["alligator", "ant", "bear", "bee", "bird", "camel", "cat", "cheetah", 
 	       "chicken", "chimpanzee", "cow", "crocodile", "deer", "dog", "dolphin", "duck", "eagle",
@@ -47,44 +41,36 @@ var animals = ["alligator", "ant", "bear", "bee", "bird", "camel", "cat", "cheet
 	       "owl", "panda", "pig", "puppy", "rabbit", "rat", "scorpion", "seal", "shark", "sheep",
 	       "snail", "snake", "spider", "squirrel", "tiger", "turtle", "wolf", "zebra"];
 
-var pic = document.getElementById("vimage");
-var scoreText = document.createElementNS("http://www.w3.org/2000/svg","text");
-scoreText.setAttribute("x",50);
-scoreText.setAttribute("y",20);
-scoreText.setAttribute("font-family","sans-serif");
-scoreText.setAttribute("font-size","20px");
-scoreText.textContent="Score:" + score;
-pic.appendChild(scoreText);
-
-
-
 
 //create buttons for play button and each letter
 var makeLetters = function(){
     var html;
     buttons = document.getElementById('buttons');
-    html = "<center><button id='play'>Play</button><br><br></center>";
+    html = "<center><button id='play' onclick='playFunc()'>Play</button><br><br></center>";
     buttons.innerHTML=html;
 
     for (var i = 0; i < letters.length; i++){
-	html += '<button onclick="typeLetter(\'' + letters[i] + '\');">'+letters[i] + '</button>';
+	html += '<button id=\'' + letters[i] + '\' onclick="typeLetter(\'' + letters[i] + '\');">'+letters[i] + '</button>';
 	buttons.innerHTML=html;
     }
 };
 
 makeLetters();
 
+var remakeButtons = function(){
+    buttons = document.getElementById("buttons");
+    buttons.innerHTML="";
+    makeLetters();
+}
 
 
 //displays the letter on screen if the letter clicked matches the letters in the word
 function typeLetter(letter){
-    chosenLetters.push(letter);
     for (var i = 0; i<currentWord.length; i++){
 	if (currentWord[i].toUpperCase() == letter){
-	    calcScore(letter);
 	    var l = document.createElementNS("http://www.w3.org/2000/svg","text");
 	    xcoor = 50 + 45*i + 5;
-	    ycoor = 50;
+	    ycoor = 47;
 	    l.setAttribute("x",xcoor.toString());
 	    l.setAttribute("y",ycoor.toString());
 	    l.setAttribute("font-family","sans-serif");
@@ -93,51 +79,32 @@ function typeLetter(letter){
 	    pic.appendChild(l);
 	}
     }
-    var complete = true;
-    for (var x = 0; x < currentWord.length; x++){
-	var complete2 = false;
-	for (var y = 0; y < chosenLetters.length; y++){
-	    if (currentWord[i] == chosenLetters[y] && !complete2){
-		complete2 = true;
-	    }
+    
+    buttons = document.getElementsByTagName("button");
+    var buttonListLength = buttons.length
+    for (var ii = 0; ii<buttonListLength; ii++){
+	if(buttons[ii].id == letter){
+	    buttons.disabled=true;
+	    buttons[ii].innerHTML='<button id=' + letters[i] + '>';
+	    break;
 	}
-	if (!complete2){
-	    complete = false;
-	}
-
     }
-    if (complete){
 
-	win();
-    }
+
+
 }
 
-function win(){
-    score += 100;
-
-    scoreText.textContent="Score:" + score;
-    pic.appendChild(scoreText);
-    if (confirm("Congrats You Guessed Correctly! Youe score is " + score + "!\n\nPlay Another One?")) {
-        playFunc;
-    }
-}
-
-function calcScore(letter){
-    var p = 0;
-    var i = letters.indexOf(letter);
-    p = points[i];
-    score += p;
-    //console.log(score);
-}
-
+/*
 var play = document.getElementById("play");
 play.addEventListener("click",playFunc);
+*/
 
 //when play is clicked, run this function
 //chooses a random word from the list of words
 //removes the previous words/spaces from the screen
 //adds this word's spaces to the screen
 function playFunc(){
+    remakeButtons();
     var catRand = Math.floor(Math.random() * 4);
     if (catRand == 0){
 	currentCat = states;
@@ -152,7 +119,7 @@ function playFunc(){
 	currentCat = animals;
 	category = "Animals";
     }
-    console.log(currentCat);
+    //console.log(currentCat);
     currentWord = currentCat[Math.floor(Math.random() * currentCat.length)];
     console.log(currentWord);
 
@@ -167,7 +134,7 @@ function playFunc(){
 	if(currentWord[i] != " "){
 	    var l = document.createElementNS("http://www.w3.org/2000/svg","text");
 	    xcoor = 50 + 45*i;
-	    ycoor = 53;
+	    ycoor = 50;
 	    l.setAttribute("x",xcoor.toString());
 	    l.setAttribute("y",ycoor.toString());
 	    l.setAttribute("font-family","sans-serif");
@@ -187,10 +154,6 @@ function playFunc(){
     text = text.concat(category);
     c.textContent = text;
     pic.appendChild(c);
-
-
-    scoreText.textContent="Score:" + score;
-    pic.appendChild(scoreText);
 }
 
 
