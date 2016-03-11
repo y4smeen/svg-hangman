@@ -79,39 +79,38 @@ makeLetters();
 
 //displays the letter on screen if the letter clicked matches the letters in the word
 function typeLetter(letter){
-    chosenLetters.push(letter);
-    console.log(chosenLetters);
-
-    calcScore(letter);
-
-    scoreText.textContent="Score: " + score;
-    pic.appendChild(scoreText);
-    for (var i = 0; i<currentWord.length; i++){
-	if (currentWord[i].toUpperCase() == letter){
-			calcScore(letter);
-			var l = document.createElementNS("http://www.w3.org/2000/svg","text");
-			xcoor = 50 + 45*i + 5;
-			ycoor = 50;
-			l.setAttribute("x",xcoor.toString());
-			l.setAttribute("y",ycoor.toString());
-			l.setAttribute("font-family","sans-serif");
-			l.setAttribute("font-size","20px");
-			l.textContent=letter;
-			pic.appendChild(l);
-		}
-    }
-    var complete = true;
-    for (var x = 0; x < currentWord.length; x++){
-		if(chosenLetters.indexOf(currentWord[x].toUpperCase()) < 0){
-			complete = false;
-			//console.log(currentWord[x].toUpperCase() + chosenLetters.indexOf(currentWord[x].toUpperCase()));
-		}
-    }
-    console.log(complete);
-    if (complete === true){
-		//console.log(score);			
-		win();
-    }
+	if (chosenLetters.indexOf(letter.toUpperCase()) < 0){
+	    chosenLetters.push(letter);
+	    console.log(chosenLetters);
+	    scoreText.textContent="Score: " + score;
+	    pic.appendChild(scoreText);
+	    for (var i = 0; i<currentWord.length; i++){
+			if (currentWord[i].toUpperCase() == letter){
+				calcScore(letter);
+				var l = document.createElementNS("http://www.w3.org/2000/svg","text");
+				xcoor = 50 + 45*i + 5;
+				ycoor = 50;
+				l.setAttribute("x",xcoor.toString());
+				l.setAttribute("y",ycoor.toString());
+				l.setAttribute("font-family","sans-serif");
+				l.setAttribute("font-size","20px");
+				l.textContent=letter;
+				pic.appendChild(l);
+			}
+	    }
+	    var complete = true;
+	    for (var x = 0; x < currentWord.length; x++){
+			if(chosenLetters.indexOf(currentWord[x].toUpperCase()) < 0){
+				complete = false;
+				//console.log(currentWord[x].toUpperCase() + chosenLetters.indexOf(currentWord[x].toUpperCase()));
+			}
+	    }
+	    console.log(complete);
+	    if (complete === true){
+			//console.log(score);			
+			win();
+	    }
+	}
 }
 
 function win(){
