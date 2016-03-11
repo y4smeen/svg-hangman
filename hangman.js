@@ -98,17 +98,18 @@ function typeLetter(letter){
     //console.log(complete);
     if (complete === true){
 		console.log(score);			
-		win(score);
+		win();
     }
 }
 
-function win(score){
+function win(){
 	//console.log(score);
 	score += 100;
+	console.log(score);
 	var r = window.confirm("Congrats Your Guessed Correctly! Youe score is " + score + "!\n\nPlay Another One?");
 	if (r === true) {
 		console.log(5);
-		playFunc;
+		playFunc();
 	}
 }
 
@@ -128,7 +129,6 @@ play.addEventListener("click",playFunc);
 //removes the previous words/spaces from the screen
 //adds this word's spaces to the screen
 function playFunc(){
-	pic.selectAll("*").remove();
 	chosenLetters = [];
 	var catRand = Math.floor(Math.random() * 4);
 	if (catRand == 0){
