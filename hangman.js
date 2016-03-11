@@ -66,7 +66,7 @@ makeLetters();
 //displays the letter on screen if the letter clicked matches the letters in the word
 function typeLetter(letter){
     for (var i = 0; i<currentWord.length; i++){
-	if (currentWord[i] == letter){
+	if (currentWord[i].toUpperCase() == letter){
 		var l = document.createElementNS("http://www.w3.org/2000/svg","text");
 		xcoor = 50 + 45*i + 5;
 		ycoor = 47;
