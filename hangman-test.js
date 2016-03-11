@@ -1,18 +1,15 @@
-var pic = document.getElementById("vimage");
-
+// Letters of the alphabet
 var letters = ['a','b','c','d','e','f','g','h','i',
                'j','k','l','m','n','o','p','q','r',
                's','t','u','v','w','x','y','z']
 
+// All the possible words in the game
 var words = ["hello", "bye", "Software Development"];
 
+// SVG
 var pic = document.getElementById("vimage");
 
-// window.onload = function(){
-//
-//
-// }
-
+// Makes the buttons with all the letters of the alphabet
 var makeLetters = function(){
     buttons = document.getElementById('buttons');
 
@@ -24,11 +21,13 @@ var makeLetters = function(){
     }
     getButtons();
 }
+
+// Gets all buttons
 var getButtons = function(){
-    var buttons = document.getElementById("buttons"); 
-    var letters2 = buttons.getElementsByTagName("button"); 
-    for (var i = 1; i < letters2.length; i++) { 
-	var letter = letters2[i].getAttribute("id"); 
+    var buttons = document.getElementById("buttons");
+    var letters2 = buttons.getElementsByTagName("button");
+    for (var i = 1; i < letters2.length; i++) {
+	var letter = letters2[i].getAttribute("id");
 	letters2[i].addEventListener("click", function(){
 	    var l = document.createElementNS("http://www.w3.org/2000/svg","text");
 	    l.setAttribute("x","50");
@@ -127,7 +126,3 @@ function playFunc(){
     }
     makeLetters();
 }
-
-
-
-

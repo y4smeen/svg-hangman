@@ -8,6 +8,7 @@ var letters = ['A','B','C','D','E','F','G','H','I',
 
 var words = ["AAAAAA", "SOFTWARE DEVELOPMENT", "HELLO"];
 
+<<<<<<< HEAD
 var states = ["Alabama"," Alaska","Arizona",,"Arkansas",,"California","Colorado", 
 "Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana",
 "Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan",
@@ -36,11 +37,14 @@ var people = ["Aristotle", "Plato", "Jesus Christ", "Socrates", "Alexander the G
 "Karl Marx", "Marco Polo", "Cicero", "Vincent van Gogh", "Genghis Khan"];	
 var pic = document.getElementById("vimage");
 
+=======
+>>>>>>> 7a0431b8829fd79c66fd67b17717f629599b74d2
 // window.onload = function(){
 //
 //
 // }
 
+//create buttons for play button and each letter
 var makeLetters = function(){
     var html;
     buttons = document.getElementById('buttons');
@@ -59,7 +63,9 @@ var makeLetters = function(){
     }
 }
 
+makeLetters();
 
+/*
 var getButtons = function(){
     var buttons = document.getElementById("buttons"); 
     var letters2 = buttons.getElementsByTagName("button"); 
@@ -77,11 +83,10 @@ var getButtons = function(){
 				    );
     }
 }
-
-makeLetters();
-
+*/
 
 
+//displays the letter on screen if the letter clicked matches the letters in the word
 function typeLetter(letter){
     for (var i = 0; i<currentWord.length; i++){
 	if (currentWord[i] == letter){
@@ -101,6 +106,10 @@ function typeLetter(letter){
 var play = document.getElementById("play");
 play.addEventListener("click",playFunc);
 
+//when play is clicked, run this function
+//chooses a random word from the list of words
+//removes the previous words/spaces from the screen
+//adds this word's spaces to the screen
 function playFunc(){
 	var catRand = Math.floor(Math.random() * 3);
 	if (catRand == 0){
@@ -113,8 +122,10 @@ function playFunc(){
 	console.log(currentCat);
     currentWord = currentCat[Math.floor(Math.random() * currentCat.length)];
     console.log(currentWord);
+
     textElements = document.getElementsByTagName("text");
     textElementLength = textElements.length;
+
     for(var ii=0; ii<textElementLength; ii++){
 	textElements[ii].textContent = "";
     }
@@ -132,7 +143,6 @@ function playFunc(){
 	    pic.appendChild(l);
 	}
     }
-    
 }
 
 
