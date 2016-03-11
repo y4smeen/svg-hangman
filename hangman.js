@@ -37,7 +37,7 @@ var foods = ["asparagus", "apples", "avacado", "acorn", "almond", "bacon", "bean
 var people = ["Aristotle", "Plato", "Jesus Christ", "Socrates", 
 	      "Leonardo da Vinci", "Confucius", "Julius Caesar", "Homer", "Pythagoras", "Archimedes",
 	      "Moses", "Muhammad", "Abraham", "Adolf Hitler", "Charlemagne",
-	      "Michelangelo", "Augustus", "Napoleon Bonaparte", "Isaac Newton", "Gautama Buddha", "Cleopatra", "Martin Luther",
+	      "Michelangelo", "Augustus", "Isaac Newton", "Cleopatra", "Martin Luther",
 	      "Karl Marx", "Marco Polo", "Cicero", "Genghis Khan"];
 
 var animals = ["alligator", "ant", "bear", "bee", "bird", "camel", "cat", "cheetah", 
@@ -53,7 +53,7 @@ scoreText.setAttribute("x",50);
 scoreText.setAttribute("y",20);
 scoreText.setAttribute("font-family","sans-serif");
 scoreText.setAttribute("font-size","20px");
-scoreText.textContent="Score:" + score;
+scoreText.textContent="Score: " + score;
 pic.appendChild(scoreText);
 
 
@@ -79,9 +79,14 @@ makeLetters();
 //displays the letter on screen if the letter clicked matches the letters in the word
 function typeLetter(letter){
     chosenLetters.push(letter);
-	console.log(chosenLetters);
+    console.log(chosenLetters);
+
+    calcScore(letter);
+
+    scoreText.textContent="Score: " + score;
+    pic.appendChild(scoreText);
     for (var i = 0; i<currentWord.length; i++){
-		if (currentWord[i].toUpperCase() == letter){
+	if (currentWord[i].toUpperCase() == letter){
 			calcScore(letter);
 			var l = document.createElementNS("http://www.w3.org/2000/svg","text");
 			xcoor = 50 + 45*i + 5;
@@ -109,10 +114,12 @@ function typeLetter(letter){
 }
 
 function win(){
-	//console.log(score);
-	score += 100;
-	console.log(score);
-	var r = window.confirm("Congrats Your Guessed Correctly! Your score is " + score + "!\n\nPlay Another One?");
+    //console.log(score);
+    score += 100;
+    console.log(score);
+    scoreText.textContent="Score: " + score;
+    pic.appendChild(scoreText);
+    var r = window.confirm("Congrats Your Guessed Correctly! Your score is " + score + "!\n\nPlay Another One?");
 	if (r === true) {
 		console.log(5);
 		playFunc();
@@ -186,7 +193,7 @@ function playFunc(){
     c.textContent = text;
     pic.appendChild(c);
 
-
+    score = 0;
     scoreText.textContent="Score:" + score;
     pic.appendChild(scoreText);
 }
