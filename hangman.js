@@ -8,7 +8,6 @@ var letters = ['A','B','C','D','E','F','G','H','I',
 
 var words = ["AAAAAA", "SOFTWARE DEVELOPMENT", "HELLO"];
 
-<<<<<<< HEAD
 var states = ["Alabama"," Alaska","Arizona",,"Arkansas",,"California","Colorado", 
 "Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana",
 "Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan",
@@ -37,12 +36,7 @@ var people = ["Aristotle", "Plato", "Jesus Christ", "Socrates", "Alexander the G
 "Karl Marx", "Marco Polo", "Cicero", "Vincent van Gogh", "Genghis Khan"];	
 var pic = document.getElementById("vimage");
 
-=======
->>>>>>> 7a0431b8829fd79c66fd67b17717f629599b74d2
-// window.onload = function(){
-//
-//
-// }
+
 
 //create buttons for play button and each letter
 var makeLetters = function(){
@@ -53,37 +47,12 @@ var makeLetters = function(){
 
     for (var i = 0; i < letters.length; i++){
 	html += '<button onclick="typeLetter(\'' + letters[i] + '\');">'+letters[i] + '</button>';
-	/*
-	  newLetter = document.createElement('button');
-	  newLetter.id = letters[i];
-	  newLetter.innerHTML = letters[i];
-	  buttons.appendChild(newLetter);
-	*/
 	buttons.innerHTML=html;
     }
-}
+};
 
 makeLetters();
 
-/*
-var getButtons = function(){
-    var buttons = document.getElementById("buttons"); 
-    var letters2 = buttons.getElementsByTagName("button"); 
-    for (var i = 1; i < letters2.length; i++) { 
-	var letter = letters2[i].getAttribute("id"); 
-	letters2[i].addEventListener("click", function(e){
-	    var l = document.createElementNS("http://www.w3.org/2000/svg","text");
-	    l.setAttribute("x","50");
-	    l.setAttribute("y","50");
-	    l.setAttribute("font-family","sans-serif");
-	    l.setAttribute("font-size","20px");
-	    l.textContent=letter;
-	    pic.appendChild(l);
-	}
-				    );
-    }
-}
-*/
 
 
 //displays the letter on screen if the letter clicked matches the letters in the word
