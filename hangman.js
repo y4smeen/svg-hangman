@@ -162,17 +162,17 @@ function playFunc(){
     }
 
     for (var i = 0; i < currentWord.length; i++){
-	if(currentWord[i] != " "){
-	    var l = document.createElementNS("http://www.w3.org/2000/svg","text");
-	    xcoor = 50 + 45*i;
-	    ycoor = 53;
-	    l.setAttribute("x",xcoor.toString());
-	    l.setAttribute("y",ycoor.toString());
-	    l.setAttribute("font-family","sans-serif");
-	    l.setAttribute("font-size","40px");
-	    l.textContent="_";
-	    pic.appendChild(l);
-	}
+		if(currentWord[i] != " "){
+		var l = document.createElementNS("http://www.w3.org/2000/svg","text");
+		xcoor = 50 + 45*i;
+		ycoor = 53;
+		l.setAttribute("x",xcoor.toString());
+		l.setAttribute("y",ycoor.toString());
+		l.setAttribute("font-family","sans-serif");
+		l.setAttribute("font-size","40px");
+		l.textContent="_";
+		pic.appendChild(l);
+		}
     }
     var c = document.createElementNS("http://www.w3.org/2000/svg", "text");
     xcor = 50;
