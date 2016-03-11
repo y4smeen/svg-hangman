@@ -4,7 +4,7 @@ var xcoor, ycoor, textElements, textElementLength;
 
 var letters = ['A','B','C','D','E','F','G','H','I',
                'J','K','L','M','N','O','P','Q','R',
-               'S','T','U','V','W','X','Y','Z']
+               'S','T','U','V','W','X','Y','Z'];
 
 var words = ["AAAAAA", "SOFTWARE DEVELOPMENT", "HELLO"];
 
@@ -33,7 +33,15 @@ var people = ["Aristotle", "Plato", "Jesus Christ", "Socrates", "Alexander the G
 "William Shakespeare", "Michelangelo", "Augustus", "Napoleon Bonaparte", "Isaac Newton",
 "Albert Einstein", "Christopher Columbus", "Johann Sebastian Bach",	
 "Ludwig van Beethoven", "Gautama Buddha", "Cleopatra", "Martin Luther", "Galileo Galilei",
-"Karl Marx", "Marco Polo", "Cicero", "Vincent van Gogh", "Genghis Khan"];	
+"Karl Marx", "Marco Polo", "Cicero", "Vincent van Gogh", "Genghis Khan"];
+
+var animals = ["alligator", "ant", "bear", "bee", "bird", "camel", "cat", "cheetah", 
+"chicken", "chimpanzee", "cow", "crocodile", "deer", "dog", "dolphin", "duck", "eagle",
+"elephant", "fish", "fly", "fox", "frog", "giraffe", "goat", "goldfish", "hamster",
+"hippopotamus", "horse", "kangaroo", "kitten", "lion", "lobster", "monkey", "octopus",
+"owl", "panda", "pig", "puppy", "rabbit", "rat", "scorpion", "seal", "shark", "sheep",
+"snail", "snake", "spider", "squirrel", "tiger", "turtle", "wolf", "zebra"];
+
 var pic = document.getElementById("vimage");
 
 
@@ -59,15 +67,15 @@ makeLetters();
 function typeLetter(letter){
     for (var i = 0; i<currentWord.length; i++){
 	if (currentWord[i] == letter){
-	    var l = document.createElementNS("http://www.w3.org/2000/svg","text");
-	    xcoor = 50 + 45*i + 5;
-	    ycoor = 47;
-	    l.setAttribute("x",xcoor.toString());
-	    l.setAttribute("y",ycoor.toString());
-	    l.setAttribute("font-family","sans-serif");
-	    l.setAttribute("font-size","20px");
-	    l.textContent=letter;
-	    pic.appendChild(l);
+		var l = document.createElementNS("http://www.w3.org/2000/svg","text");
+		xcoor = 50 + 45*i + 5;
+		ycoor = 47;
+		l.setAttribute("x",xcoor.toString());
+		l.setAttribute("y",ycoor.toString());
+		l.setAttribute("font-family","sans-serif");
+		l.setAttribute("font-size","20px");
+		l.textContent=letter;
+		pic.appendChild(l);
 	}
     }
 }
@@ -80,16 +88,19 @@ play.addEventListener("click",playFunc);
 //removes the previous words/spaces from the screen
 //adds this word's spaces to the screen
 function playFunc(){
-	var catRand = Math.floor(Math.random() * 3);
+	var catRand = Math.floor(Math.random() * 4);
 	if (catRand == 0){
 		currentCat = states;
 		category = "US States";
 	} else if (catRand == 1){
 		currentCat = foods;
 		category = "Foods and Drinks";
-	} else {
+	} else if (catRand == 2){
 		currentCat = people;
 		category = "Historical Figures";
+	} else {
+		currentCat = animals;
+		category = "Animals";
 	}
 	console.log(currentCat);
     currentWord = currentCat[Math.floor(Math.random() * currentCat.length)];
@@ -111,7 +122,7 @@ function playFunc(){
 			l.setAttribute("y",ycoor.toString());
 			l.setAttribute("font-family","sans-serif");
 			l.setAttribute("font-size","40px");
-			l.textContent="_"
+			l.textContent="_";
 			pic.appendChild(l);
 		}
     }
@@ -127,6 +138,8 @@ function playFunc(){
     c.textContent = text;
 	pic.appendChild(c);
 }
+
+
 
 
 
