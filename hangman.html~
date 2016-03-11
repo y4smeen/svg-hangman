@@ -5,7 +5,7 @@
   <link href="style.css" rel="stylesheet">
 </head>
 <body>
-  <svg id="vimage" width="1000" height="200">
+  <svg id="vimage" width="1000" height="500">
   </svg>
   <div id="buttons">
     <button id="play">Play</button>
