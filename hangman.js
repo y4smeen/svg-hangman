@@ -1,11 +1,14 @@
 var pic = document.getElementById("vimage");
 
-var xcoor, ycoor, textElements, textElementLength, numOfGuesses;
+var xcoor, ycoor, textElements, textElementLength;
 var score = 0;
+var numOfGuesses = 0;
 
 var letters = ['A','B','C','D','E','F','G','H','I',
                'J','K','L','M','N','O','P','Q','R',
                'S','T','U','V','W','X','Y','Z'];
+               
+var bodyParts = ["", "head", "body", "arm1", "arm2", "leg1", "leg2"];
 
 var points = [1, 3, 3, 2, 1, 4, 2, 4, 1, 
 	      8, 5, 1, 3, 1, 1, 3, 10, 1, 1, 
@@ -91,25 +94,33 @@ function typeLetter(letter){
 	  }
 	  draw(numOfGuesses);
 	*/
+	var correct = false;
 	for (var i = 0; i<currentWord.length; i++){
 	    if (currentWord[i].toUpperCase() == letter){
-		calcScore(letter);
-		scoreText.textContent="Score: " + score;
-	    	pic.appendChild(scoreText);
-		var l = document.createElementNS("http://www.w3.org/2000/svg","text");
-		xcoor = 50 + 45*i + 5;
-		ycoor = 50;
-		l.setAttribute("x",xcoor.toString());
-		l.setAttribute("y",ycoor.toString());
-		l.setAttribute("font-family","sans-serif");
-		l.setAttribute("font-size","20px");
-		l.textContent=letter;
-		pic.appendChild(l);
+			calcScore(letter);
+			scoreText.textContent="Score: " + score;
+		    	pic.appendChild(scoreText);
+			var l = document.createElementNS("http://www.w3.org/2000/svg","text");
+			xcoor = 50 + 45*i + 5;
+			ycoor = 50;
+			l.setAttribute("x",xcoor.toString());
+			l.setAttribute("y",ycoor.toString());
+			l.setAttribute("font-family","sans-serif");
+			l.setAttribute("font-size","20px");
+			l.textContent=letter;
+			pic.appendChild(l);
+			if (correct === false){
+				correct = true;
+			}
 	    }
+	}
+	if (correct === false){
+		numOfGuesses = numOfGuesses + 1;
+		drawPerson(numOfGuesses);
 	}
 	var complete = true;
 	for (var x = 0; x < currentWord.length; x++){
-	    if(chosenLetters.indexOf(currentWord[x].toUpperCase()) < 0){
+	    if(chosenLetters.indexOf(currentWord[x].toUpperCase()) < 0 && currentWord[x] != " "){
 		complete = false;
 		//console.log(currentWord[x].toUpperCase() + chosenLetters.indexOf(currentWord[x].toUpperCase()));
 	    }
@@ -209,21 +220,73 @@ function playFunc(){
 
 var drawPerson = function(numOfGuesses){
     bodyPart = bodyParts[numOfGuesses];
+    console.log(numOfGuesses);
+    console.log(bodyPart);
     draw(bodyPart);
 }
 
 
 
 var draw = function(bodyPart){
+	//console.log(bodyPart);
     if (bodyPart = "head"){
-	var c = document.createElementNS("http://www.w3.org/2000/svg","ellipse");
-	c.setAttribute("cx","600");
-	c.setAttribute("cy","50");
-	c.setAttribute("rx","25");
-	c.setAttribute("ry","50");
-	c.setAttribute("fill","white");
-	c.setAttribute("stroke","black");
-	pic.appendChild(c);
+		var c = document.createElementNS("http://www.w3.org/2000/svg","ellipse");
+		c.setAttribute("cx","900");
+		c.setAttribute("cy","50");
+		c.setAttribute("rx","25");
+		c.setAttribute("ry","50");
+		c.setAttribute("fill","white");
+		c.setAttribute("stroke","black");
+		pic.appendChild(c);
+    }
+    if (bodyPart = "body"){
+		var c = document.createElementNS("http://www.w3.org/2000/svg","line");
+		c.setAttribute("x1","900");
+		c.setAttribute("x2","900");
+		c.setAttribute("y1","100");
+		c.setAttribute("ry","300");
+		c.setAttribute("stroke","black");
+		pic.appendChild(c);
+    }
+    if (bodyPart = "body"){
+		var c = document.createElementNS("http://www.w3.org/2000/svg","ellipse");
+		c.setAttribute("cx","900");
+		c.setAttribute("cy","50");
+		c.setAttribute("rx","25");
+		c.setAttribute("ry","50");
+		c.setAttribute("fill","black");
+		c.setAttribute("stroke","black");
+		pic.appendChild(c);
+    }
+    if (bodyPart = "arm2"){
+		var c = document.createElementNS("http://www.w3.org/2000/svg","ellipse");
+		c.setAttribute("cx","900");
+		c.setAttribute("cy","50");
+		c.setAttribute("rx","25");
+		c.setAttribute("ry","50");
+		c.setAttribute("fill","white");
+		c.setAttribute("stroke","black");
+		pic.appendChild(c);
+    }
+    if (bodyPart = "leg1"){
+		var c = document.createElementNS("http://www.w3.org/2000/svg","ellipse");
+		c.setAttribute("cx","900");
+		c.setAttribute("cy","50");
+		c.setAttribute("rx","25");
+		c.setAttribute("ry","50");
+		c.setAttribute("fill","white");
+		c.setAttribute("stroke","black");
+		pic.appendChild(c);
+    }
+    if (bodyPart = "leg2"){
+		var c = document.createElementNS("http://www.w3.org/2000/svg","ellipse");
+		c.setAttribute("cx","900");
+		c.setAttribute("cy","50");
+		c.setAttribute("rx","25");
+		c.setAttribute("ry","50");
+		c.setAttribute("fill","white");
+		c.setAttribute("stroke","black");
+		pic.appendChild(c);
     }
 }
 
