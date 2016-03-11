@@ -37,8 +37,8 @@ var foods = ["asparagus", "apples", "avacado", "acorn", "almond", "bacon", "bean
 var people = ["Aristotle", "Plato", "Jesus Christ", "Socrates", 
 	      "Leonardo da Vinci", "Confucius", "Julius Caesar", "Homer", "Pythagoras", "Archimedes",
 	      "Moses", "Muhammad", "Abraham", "Adolf Hitler", "Charlemagne",
-	      "Michelangelo", "Augustus", "Isaac Newton", "Cleopatra", "Martin Luther",
-	      "Karl Marx", "Marco Polo", "Cicero", "Genghis Khan"];
+	      "Michelangelo", "Augustus", "Isaac Newton", "Cleopatra",
+	      "Karl Marx", "Marco Polo", "Cicero"];
 
 var animals = ["alligator", "ant", "bear", "bee", "bird", "camel", "cat", "cheetah", 
 	       "chicken", "chimpanzee", "cow", "crocodile", "deer", "dog", "dolphin", "duck", "eagle",
@@ -49,7 +49,8 @@ var animals = ["alligator", "ant", "bear", "bee", "bird", "camel", "cat", "cheet
 
 var pic = document.getElementById("vimage");
 var scoreText = document.createElementNS("http://www.w3.org/2000/svg","text");
-scoreText.setAttribute("x",50);
+scoreText.setAttribute("text-anchor","end");
+scoreText.setAttribute("x",800);
 scoreText.setAttribute("y",20);
 scoreText.setAttribute("font-family","sans-serif");
 scoreText.setAttribute("font-size","20px");
