@@ -194,8 +194,7 @@ function playFunc(){
     c.textContent = text;
     pic.appendChild(c);
 
-    score = 0;
-    scoreText.textContent="Score:" + score;
+    scoreText.textContent="Score: " + score;
     pic.appendChild(scoreText);
 }
 
