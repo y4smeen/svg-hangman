@@ -11,7 +11,7 @@ var points = [1, 3, 3, 2, 1, 4, 2, 4, 1,
 			8, 5, 1, 3, 1, 1, 3, 10, 1, 1, 
 			1, 1, 4, 4, 8, 4, 10];
 			
-var chosenLetters = [];
+var chosenLetters;
 
 var words = ["AAAAAA", "SOFTWARE DEVELOPMENT", "HELLO"];
 
@@ -73,6 +73,7 @@ makeLetters();
 //displays the letter on screen if the letter clicked matches the letters in the word
 function typeLetter(letter){
 	chosenLetters.push(letter);
+	console.log(chosenLetters);
     for (var i = 0; i<currentWord.length; i++){
 		if (currentWord[i].toUpperCase() == letter){
 			calcScore(letter);
@@ -89,26 +90,25 @@ function typeLetter(letter){
     }
     var complete = true;
 	for (var x = 0; x < currentWord.length; x++){
-		var complete2 = false;
-		for (var y = 0; y < chosenLetters.length; y++){
-			if (currentWord[i] == chosenLetters[y] && !complete2){
-				complete2 = true;
-			}
-		}
-		if (!complete2){
+		if (chosenLetters.indexOf(currentWord[x].toUpperCase()) < 0){
 			complete = false;
+			//console.log(currentWord[x].toUpperCase());
 		}
-
     }
-    if (complete){
-		win;
+    //console.log(complete);
+    if (complete === true){
+		console.log(score);			
+		win(score);
     }
 }
 
-function win(){
+function win(score){
+	//console.log(score);
 	score += 100;
-	if (confirm("Congrats You Guessed Correctly! Youe score is " + score + "!\n\nPlay Another One?")) {
-        playFunc;
+	var r = window.confirm("Congrats Your Guessed Correctly! Youe score is " + score + "!\n\nPlay Another One?");
+	if (r === true) {
+		console.log(5);
+		playFunc;
 	}
 }
 
@@ -117,7 +117,7 @@ function calcScore(letter){
 	var i = letters.indexOf(letter);
 	p = points[i];
 	score += p;
-	//console.log(score);
+	console.log(score);
 }
 
 var play = document.getElementById("play");
@@ -128,6 +128,8 @@ play.addEventListener("click",playFunc);
 //removes the previous words/spaces from the screen
 //adds this word's spaces to the screen
 function playFunc(){
+	pic.selectAll("*").remove();
+	chosenLetters = [];
 	var catRand = Math.floor(Math.random() * 4);
 	if (catRand == 0){
 		currentCat = states;
