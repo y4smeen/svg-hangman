@@ -83,10 +83,13 @@ function playFunc(){
 	var catRand = Math.floor(Math.random() * 3);
 	if (catRand == 0){
 		currentCat = states;
+		category = "US States";
 	} else if (catRand == 1){
 		currentCat = foods;
+		category = "Foods and Drinks";
 	} else {
 		currentCat = people;
+		category = "Historical Figures";
 	}
 	console.log(currentCat);
     currentWord = currentCat[Math.floor(Math.random() * currentCat.length)];
@@ -100,18 +103,29 @@ function playFunc(){
     }
 
     for (var i = 0; i < currentWord.length; i++){
-	if(currentWord[i] != " "){
-	    var l = document.createElementNS("http://www.w3.org/2000/svg","text");
-	    xcoor = 50 + 45*i;
-	    ycoor = 50;
-	    l.setAttribute("x",xcoor.toString());
-	    l.setAttribute("y",ycoor.toString());
-	    l.setAttribute("font-family","sans-serif");
-	    l.setAttribute("font-size","40px");
-	    l.textContent="_"
-	    pic.appendChild(l);
-	}
+		if(currentWord[i] != " "){
+			var l = document.createElementNS("http://www.w3.org/2000/svg","text");
+			xcoor = 50 + 45*i;
+			ycoor = 50;
+			l.setAttribute("x",xcoor.toString());
+			l.setAttribute("y",ycoor.toString());
+			l.setAttribute("font-family","sans-serif");
+			l.setAttribute("font-size","40px");
+			l.textContent="_"
+			pic.appendChild(l);
+		}
     }
+	var c = document.createElementNS("http://www.w3.org/2000/svg", "text");
+	xcor = 50;
+	ycor = 100;
+	c.setAttribute("x",xcor.toString());
+    c.setAttribute("y",ycor.toString());
+    c.setAttribute("font-family","sans-serif");
+    c.setAttribute("font-size","20px");
+    var text = "Category: ";
+    text = text.concat(category);
+    c.textContent = text;
+	pic.appendChild(c);
 }
 
 
