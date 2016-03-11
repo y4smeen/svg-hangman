@@ -82,11 +82,11 @@ function typeLetter(letter){
 	if (chosenLetters.indexOf(letter.toUpperCase()) < 0){
 	    chosenLetters.push(letter);
 	    console.log(chosenLetters);
-	    scoreText.textContent="Score: " + score;
-	    pic.appendChild(scoreText);
 	    for (var i = 0; i<currentWord.length; i++){
 			if (currentWord[i].toUpperCase() == letter){
 				calcScore(letter);
+				scoreText.textContent="Score: " + score;
+	    		pic.appendChild(scoreText);
 				var l = document.createElementNS("http://www.w3.org/2000/svg","text");
 				xcoor = 50 + 45*i + 5;
 				ycoor = 50;
