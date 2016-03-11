@@ -1,10 +1,17 @@
 var pic = document.getElementById("vimage");
 
 var xcoor, ycoor, textElements, textElementLength;
+var score = 0;
 
 var letters = ['A','B','C','D','E','F','G','H','I',
                'J','K','L','M','N','O','P','Q','R',
                'S','T','U','V','W','X','Y','Z'];
+               
+var points = [1, 3, 3, 2, 1, 4, 2, 4, 1, 
+			8, 5, 1, 3, 1, 1, 3, 10, 1, 1, 
+			1, 1, 4, 4, 8, 4, 10];
+			
+var chosenLetters = [];
 
 var words = ["AAAAAA", "SOFTWARE DEVELOPMENT", "HELLO"];
 
@@ -65,19 +72,50 @@ makeLetters();
 
 //displays the letter on screen if the letter clicked matches the letters in the word
 function typeLetter(letter){
+	chosenLetters.push(letter);
     for (var i = 0; i<currentWord.length; i++){
-	if (currentWord[i] == letter){
-		var l = document.createElementNS("http://www.w3.org/2000/svg","text");
-		xcoor = 50 + 45*i + 5;
-		ycoor = 47;
-		l.setAttribute("x",xcoor.toString());
-		l.setAttribute("y",ycoor.toString());
-		l.setAttribute("font-family","sans-serif");
-		l.setAttribute("font-size","20px");
-		l.textContent=letter;
-		pic.appendChild(l);
-	}
+		if (currentWord[i] == letter){
+			calcScore(letter);
+			var l = document.createElementNS("http://www.w3.org/2000/svg","text");
+			xcoor = 50 + 45*i + 5;
+			ycoor = 47;
+			l.setAttribute("x",xcoor.toString());
+			l.setAttribute("y",ycoor.toString());
+			l.setAttribute("font-family","sans-serif");
+			l.setAttribute("font-size","20px");
+			l.textContent=letter;
+			pic.appendChild(l);
+		}
     }
+    var complete = true;
+	for (var x = 0; x < currentWord.length; x++){
+		var complete2 = false;
+		for (var y = 0; y < chosenLetters.length; y++){
+			if (currentWord[i] == chosenLetters[y] && !complete2){
+				complete2 = true;
+			}
+		}
+		if (!complete2){
+			complete = false;
+		}
+    }
+    if (complete){
+		win;
+    }
+}
+
+function win(){
+	score += 100;
+	if (confirm("Congrats You Guessed Correctly! Youe score is " + score + "!\n\nPlay Another One?")) {
+        playFunc;
+	}
+}
+
+function calcScore(letter){
+	var p = 0;
+	var i = letters.indexOf(letter);
+	p = points[i];
+	score += p;
 }
 
 var play = document.getElementById("play");
